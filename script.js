@@ -66,6 +66,7 @@ function clearOperations() {
 
 const operatorBtns = document.querySelectorAll(".operators")
 const numberBtns = document.querySelectorAll(".numbers")
+const clearBtn = document.querySelector(".clear")
 
 numberBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
