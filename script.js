@@ -15,14 +15,16 @@ function div(a,b) {
 }
 
 function operator(a,b,sign) {
+  a = parseInt(a);
+  b = parseInt(b);
   if (sign === '+'){
-    return add(a,b)
+    return add(a,b);
   }else if (sign === '-'){
-    return sub(a,b)
+    return sub(a,b);
   }else if (sign === '×'){
-    return multi(a,b)
+    return multi(a,b);
   }else if (sign === '÷'){
-    return div(a,b)
+    return div(a,b);
   }
 }
 
@@ -66,13 +68,13 @@ numberBtns.forEach((btn) => {
 
 operatorBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
-    updateCurrentResult(e.target.innerHTML);
+    updateCurrentOperator(e.target.innerHTML);
     if (!firstNumber){
       updateFirstNumber(currentNumber);
-      console.log(firstNumber);
     }else{
       updateSecondNumber(currentNumber);
-      console.log(secondNumber);
+      updateFirstNumber(operator(firstNumber,secondNumber,currentOperator));
+      console.log(firstNumber);
     }
     currentNumber = undefined;
   });
