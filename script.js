@@ -19,9 +19,9 @@ function operator(a,b,sign) {
     return add(a,b)
   }else if (sign === '-'){
     return sub(a,b)
-  }else if (sign === '*'){
+  }else if (sign === '×'){
     return multi(a,b)
-  }else if (sign === '/'){
+  }else if (sign === '÷'){
     return div(a,b)
   }
 }
