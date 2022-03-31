@@ -57,6 +57,13 @@ function updateCurrentNumber(a) {
   }
 }
 
+function clearOperations() {
+  firstNumber = undefined;
+  secondNumber= undefined;
+  currentNumber= undefined;
+  currentOperator= undefined;
+}
+
 const operatorBtns = document.querySelectorAll(".operators")
 const numberBtns = document.querySelectorAll(".numbers")
 
@@ -68,13 +75,16 @@ numberBtns.forEach((btn) => {
 
 operatorBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
-    updateCurrentOperator(e.target.innerHTML);
     if (!firstNumber){
       updateFirstNumber(currentNumber);
     }else{
       updateSecondNumber(currentNumber);
       updateFirstNumber(operator(firstNumber,secondNumber,currentOperator));
+    }
+    updateCurrentOperator(e.target.innerHTML);
+    if (currentOperator === '='){
       console.log(firstNumber);
+      clearOperations();
     }
     currentNumber = undefined;
   });
