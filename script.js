@@ -47,6 +47,8 @@ function updateSecondNumber(a) {
 
 function updateCurrentOperator(a) {
   currentOperator = a;
+  displayInput.innerHTML = '';
+  displayResult.innerHTML = firstNumber + ' ' + currentOperator;
 }
 
 function updateCurrentNumber(a) {
@@ -55,6 +57,7 @@ function updateCurrentNumber(a) {
   }else{
     currentNumber += a;
   }
+  displayInput.innerHTML = currentNumber;
 }
 
 function clearOperations() {
@@ -67,6 +70,8 @@ function clearOperations() {
 const operatorBtns = document.querySelectorAll(".operators")
 const numberBtns = document.querySelectorAll(".numbers")
 const clearBtn = document.querySelector(".clear")
+const displayResult = document.querySelector(".result")
+const displayInput = document.querySelector(".input")
 
 numberBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
@@ -82,11 +87,19 @@ operatorBtns.forEach((btn) => {
       updateSecondNumber(currentNumber);
       updateFirstNumber(operator(firstNumber,secondNumber,currentOperator));
     }
-    updateCurrentOperator(e.target.innerHTML);
-    if (currentOperator === '='){
-      console.log(firstNumber);
+    if (e.target.innerHTML === '='){
+      displayResult.innerHTML = firstNumber;
+      displayInput.innerHTML = '';
       clearOperations();
+    }else{
+      updateCurrentOperator(e.target.innerHTML);
     }
     currentNumber = undefined;
   });
 });
+
+clearBtn.addEventListener('click', (e) => {
+  clearOperations();
+  displayResult.innerHTML = '';
+  displayInput.innerHTML = '';
+})
