@@ -81,6 +81,7 @@ numberBtns.forEach((btn) => {
 
 operatorBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
+    if (!currentNumber) return;
     if (!firstNumber){
       updateFirstNumber(currentNumber);
     }else{
