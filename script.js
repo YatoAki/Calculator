@@ -14,6 +14,10 @@ function div(a,b) {
   return a/b;
 }
 
+function formatNumber(a) {
+  return a.toLocaleString("en-US");
+}
+
 function operator(a,b,sign) {
   a = parseInt(a);
   b = parseInt(b);
@@ -47,8 +51,8 @@ function updateSecondNumber(a) {
 
 function updateCurrentOperator(a) {
   currentOperator = a;
-  displayInput.innerHTML = '';
-  displayResult.innerHTML = firstNumber + ' ' + currentOperator;
+  updateDisplayInput('');
+  updateDisplayResult(firstNumber + ' ' + currentOperator);
 }
 
 function updateCurrentNumber(a) {
@@ -57,7 +61,7 @@ function updateCurrentNumber(a) {
   }else{
     currentNumber += a;
   }
-  displayInput.innerHTML = currentNumber;
+  updateDisplayInput(currentNumber);
 }
 
 function clearOperations() {
@@ -65,6 +69,14 @@ function clearOperations() {
   secondNumber= undefined;
   currentNumber= undefined;
   currentOperator= undefined;
+}
+
+function updateDisplayResult(s) {
+  displayResult.innerHTML = s;
+}
+
+function updateDisplayInput(s) {
+  displayInput.innerHTML = s;
 }
 
 const operatorBtns = document.querySelectorAll(".operators")
@@ -89,8 +101,8 @@ operatorBtns.forEach((btn) => {
       updateFirstNumber(operator(firstNumber,secondNumber,currentOperator));
     }
     if (e.target.innerHTML === '='){
-      displayResult.innerHTML = firstNumber;
-      displayInput.innerHTML = '';
+      updateDisplayResult(firstNumber);
+      updateDisplayInput('');
       clearOperations();
     }else{
       updateCurrentOperator(e.target.innerHTML);
@@ -101,6 +113,6 @@ operatorBtns.forEach((btn) => {
 
 clearBtn.addEventListener('click', (e) => {
   clearOperations();
-  displayResult.innerHTML = '';
-  displayInput.innerHTML = '';
+  updateDisplayResult('');
+  updateDisplayInput('');
 })
