@@ -15,12 +15,12 @@ function div(a,b) {
 }
 
 function formatNumber(a) {
-  return a.toLocaleString("en-US");
+  return Number(a).toLocaleString("en-US");
 }
 
 function operator(a,b,sign) {
-  a = parseInt(a);
-  b = parseInt(b);
+  a = Number(a);
+  b = Number(b);
   if (sign === '+'){
     return add(a,b);
   }else if (sign === '-'){
@@ -52,7 +52,7 @@ function updateSecondNumber(a) {
 function updateCurrentOperator(a) {
   currentOperator = a;
   updateDisplayInput('');
-  updateDisplayResult(firstNumber + ' ' + currentOperator);
+  updateDisplayResult(formatNumber(firstNumber) + ' ' + currentOperator);
 }
 
 function updateCurrentNumber(a) {
@@ -76,7 +76,7 @@ function updateDisplayResult(s) {
 }
 
 function updateDisplayInput(s) {
-  displayInput.innerHTML = s;
+  displayInput.innerHTML = formatNumber(s);
 }
 
 const operatorBtns = document.querySelectorAll(".operators")
@@ -101,7 +101,7 @@ operatorBtns.forEach((btn) => {
       updateFirstNumber(operator(firstNumber,secondNumber,currentOperator));
     }
     if (e.target.innerHTML === '='){
-      updateDisplayResult(firstNumber);
+      updateDisplayResult(formatNumber(firstNumber));
       updateDisplayInput('');
       clearOperations();
     }else{
